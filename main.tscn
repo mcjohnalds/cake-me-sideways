@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnyvqqdcult6t"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_tsjiu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x2281"]
+
+[node name="Control" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tsjiu")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_x2281")
