@@ -11,8 +11,11 @@ var _bake_screen: BakeScreen
 var _stack_screen: StackScreen
 var _rating_screen: RatingScreen
 var _reward: int
+var _started_at: float
+var _has_started := false
 @onready var _screen_title: Label = $ScreenTitle
 @onready var _money_label: Label = $MoneyLabel
+@onready var _time_label: Label = $TimeLabel
 
 
 var _money: int:
@@ -33,10 +36,12 @@ func _ready() -> void:
 
 
 func _on_start_button_pressed() -> void:
+	_has_started = true
+	_started_at = Util.time()
 	_start_screen.queue_free()
+
 	_screen_title.visible = true
 	_money_label.visible = true
-
 	_go_to_orders_screen()
 
 
@@ -94,6 +99,15 @@ func _on_rating_screen_completed() -> void:
 	_rating_screen.queue_free()
 
 	_go_to_orders_screen()
+
+
+func _process(_delta: float) -> void:
+	if _has_started:
+		var seconds_passed := Util.time() - _started_at
+		var seconds_remaining := 2 * 60 - floori(seconds_passed)
+		var seconds_part := seconds_remaining % 60
+		var minutes_part := floori(seconds_remaining / 60.0)
+		_time_label.text = "%d:%02d" % [minutes_part, seconds_part]
 
 
 func _unhandled_input(event: InputEvent) -> void:
