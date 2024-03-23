@@ -1,9 +1,11 @@
 class_name Main extends Control
 
+const _start_screen_scene := preload("res://start_screen.tscn")
 const _orders_screen_scene := preload("res://orders_screen.tscn")
 const _bake_screen_scene := preload("res://bake_screen.tscn")
 const _stack_screen_scene := preload("res://stack_screen.tscn")
 const _rating_screen_scene := preload("res://rating_screen.tscn")
+var _start_screen: StartScreen
 var _orders_screen: OrdersScreen
 var _bake_screen: BakeScreen
 var _stack_screen: StackScreen
@@ -23,6 +25,18 @@ var _money: int:
 
 func _ready() -> void:
 	_money = 0
+	_screen_title.visible = false
+	_money_label.visible = false
+	_start_screen = _start_screen_scene.instantiate()
+	_start_screen.start_button_pressed.connect(_on_start_button_pressed)
+	add_child(_start_screen)
+
+
+func _on_start_button_pressed() -> void:
+	_start_screen.queue_free()
+	_screen_title.visible = true
+	_money_label.visible = true
+
 	_go_to_orders_screen()
 
 
@@ -36,6 +50,7 @@ func _go_to_orders_screen() -> void:
 func _on_order_accepted(layer_count: int, reward: int) -> void:
 	_reward = reward
 	_orders_screen.queue_free()
+
 	_screen_title.text = "Bake"
 	_bake_screen = _bake_screen_scene.instantiate()
 	_bake_screen.layer_count = layer_count
@@ -45,6 +60,7 @@ func _on_order_accepted(layer_count: int, reward: int) -> void:
 
 func _on_bake_screen_completed() -> void:
 	_bake_screen.queue_free()
+
 	_screen_title.text = "Stack"
 	_stack_screen = _stack_screen_scene.instantiate()
 	_stack_screen.layer_cooked_proportions = (
@@ -56,6 +72,7 @@ func _on_bake_screen_completed() -> void:
 
 func _on_stack_screen_completed() -> void:
 	_stack_screen.queue_free()
+
 	_screen_title.text = "Rating"
 	_rating_screen = _rating_screen_scene.instantiate()
 	_rating_screen.reward = _reward
@@ -73,8 +90,9 @@ func _on_stack_screen_completed() -> void:
 
 
 func _on_rating_screen_completed() -> void:
-	_rating_screen.queue_free()
 	_money += _reward + _rating_screen.get_star_bonus()
+	_rating_screen.queue_free()
+
 	_go_to_orders_screen()
 
 
