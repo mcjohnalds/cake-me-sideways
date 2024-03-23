@@ -2,7 +2,6 @@ class_name BakeScreen extends Control
 
 signal completed
 
-const _PERFECT_COOKED_PROPORTION := 0.7
 const _PERFECT_COOKED_TOLERANCE := 0.1
 const _ORDER_LAYER_COUNT := 2
 var layer_cooked_proportions: Array[float]
@@ -92,7 +91,7 @@ func _update_thermometer() -> void:
 	var perfect_h := thermo_h * _PERFECT_COOKED_TOLERANCE
 	_thermometer_perfect_panel.size.y = perfect_h
 	_thermometer_perfect_panel.position.y = (
-		(1.0 - _PERFECT_COOKED_PROPORTION) * thermo_h - perfect_h / 2.0
+		(1.0 - Util.PERFECT_COOKED_PROPORTION) * thermo_h - perfect_h / 2.0
 	)
 	_thermometer_fill_panel.size.y = fill_h
 	_thermometer_fill_panel.position.y = thermo_h - fill_h

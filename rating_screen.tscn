@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdbgd86dd0ymb"]
+[gd_scene load_steps=3 format=3 uid="uid://bdbgd86dd0ymb"]
 
 [ext_resource type="Script" path="res://rating_screen.gd" id="1_omf3l"]
+[ext_resource type="PackedScene" uid="uid://cr8fuisaekftg" path="res://layer.tscn" id="2_1ylpl"]
 
 [node name="RatingScreen" type="Control"]
 layout_mode = 3
@@ -10,3 +11,78 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_omf3l")
+layer_cooked_proportions = Array[float]([0.6, 0.7, 0.5, 0.2])
+layer_off_center_proportions = Array[float]([2.08165e-12, 0.1, 0.1, 0.1])
+layer_position_xs = Array[float]([2.08165e-12, 10.0, 15.0, 10.0])
+
+[node name="StarsBackground" type="Label" parent="."]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 170.0
+offset_right = 430.0
+offset_bottom = 227.0
+theme_override_font_sizes/font_size = 40
+text = "★ ★ ★ ★ ★"
+
+[node name="StarsFill" type="Label" parent="."]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 170.0
+offset_right = 390.0
+offset_bottom = 227.0
+theme_override_colors/font_color = Color(1, 0.729412, 0.286275, 1)
+theme_override_font_sizes/font_size = 40
+text = "★ ★ ★ "
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 250.0
+offset_right = 376.0
+offset_bottom = 292.0
+theme_override_font_sizes/font_size = 30
+text = "Earned: $100"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 320.0
+offset_right = 430.0
+offset_bottom = 380.0
+theme_override_font_sizes/font_size = 30
+text = "Ok"
+
+[node name="Layers" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 620.0
+offset_top = 210.0
+offset_right = 740.0
+offset_bottom = 370.0
+
+[node name="Layer1" parent="Layers" instance=ExtResource("2_1ylpl")]
+offset_top = 120.0
+offset_bottom = 160.0
+cooked_proportion = 0.6
+
+[node name="Layer2" parent="Layers" instance=ExtResource("2_1ylpl")]
+offset_left = 10.0
+offset_top = 80.0
+offset_right = 110.0
+offset_bottom = 120.0
+layer_index = 1
+cooked_proportion = 0.7
+
+[node name="Layer3" parent="Layers" instance=ExtResource("2_1ylpl")]
+offset_left = 15.0
+offset_top = 40.0
+offset_right = 95.0
+offset_bottom = 80.0
+layer_index = 2
+cooked_proportion = 0.5
+
+[node name="Layer4" parent="Layers" instance=ExtResource("2_1ylpl")]
+offset_left = 10.0
+offset_right = 70.0
+layer_index = 3
+cooked_proportion = 0.2
