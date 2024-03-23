@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://bd5784pp4hq7q"]
+
+[ext_resource type="Script" path="res://orders_screen.gd" id="1_48re7"]
+[ext_resource type="PackedScene" uid="uid://b3ngu66fpsk6y" path="res://order_card.tscn" id="2_rbdf2"]
+
+[node name="OrdersScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_48re7")
+
+[node name="OrderCard1" parent="." instance=ExtResource("2_rbdf2")]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 160.0
+offset_right = 290.0
+offset_bottom = 390.0
+
+[node name="OrderCard2" parent="." instance=ExtResource("2_rbdf2")]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 160.0
+offset_right = 600.0
+offset_bottom = 390.0
+
+[node name="OrderCard3" parent="." instance=ExtResource("2_rbdf2")]
+layout_mode = 0
+offset_left = 680.0
+offset_top = 160.0
+offset_right = 910.0
+offset_bottom = 390.0

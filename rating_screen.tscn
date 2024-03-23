@@ -18,18 +18,18 @@ layer_position_xs = Array[float]([2.08165e-12, 10.0, 15.0, 10.0])
 [node name="StarsBackground" type="Label" parent="."]
 layout_mode = 0
 offset_left = 190.0
-offset_top = 170.0
+offset_top = 150.0
 offset_right = 430.0
-offset_bottom = 227.0
+offset_bottom = 207.0
 theme_override_font_sizes/font_size = 40
 text = "★ ★ ★ ★ ★"
 
 [node name="StarsFill" type="Label" parent="."]
 layout_mode = 0
 offset_left = 190.0
-offset_top = 170.0
+offset_top = 150.0
 offset_right = 390.0
-offset_bottom = 227.0
+offset_bottom = 207.0
 theme_override_colors/font_color = Color(1, 0.729412, 0.286275, 1)
 theme_override_font_sizes/font_size = 40
 text = "★ ★ ★ "
@@ -37,18 +37,66 @@ text = "★ ★ ★ "
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
 offset_left = 190.0
-offset_top = 250.0
-offset_right = 376.0
-offset_bottom = 292.0
-theme_override_font_sizes/font_size = 30
-text = "Earned: $100"
+offset_top = 230.0
+offset_right = 350.0
+offset_bottom = 272.0
+theme_override_font_sizes/font_size = 25
+text = "Reward"
 
-[node name="Button" type="Button" parent="."]
+[node name="Label2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 190.0
-offset_top = 320.0
+offset_top = 280.0
+offset_right = 350.0
+offset_bottom = 322.0
+theme_override_font_sizes/font_size = 25
+text = "Star Bonus"
+
+[node name="RewardLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 230.0
+offset_right = 426.0
+offset_bottom = 272.0
+theme_override_font_sizes/font_size = 25
+text = "$100"
+horizontal_alignment = 2
+
+[node name="StarBonusLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 280.0
+offset_right = 426.0
+offset_bottom = 322.0
+theme_override_font_sizes/font_size = 25
+text = "$150"
+horizontal_alignment = 2
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 330.0
+offset_right = 350.0
+offset_bottom = 372.0
+theme_override_font_sizes/font_size = 25
+text = "Total"
+
+[node name="TotalLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 330.0
+offset_right = 426.0
+offset_bottom = 372.0
+theme_override_font_sizes/font_size = 25
+text = "$150"
+horizontal_alignment = 2
+
+[node name="OkButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 390.0
 offset_right = 430.0
-offset_bottom = 380.0
+offset_bottom = 450.0
 theme_override_font_sizes/font_size = 30
 text = "Ok"
 

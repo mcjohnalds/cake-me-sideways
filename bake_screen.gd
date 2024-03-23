@@ -3,7 +3,7 @@ class_name BakeScreen extends Control
 signal completed
 
 const _PERFECT_COOKED_TOLERANCE := 0.1
-const _ORDER_LAYER_COUNT := 2
+var layer_count: int
 var layer_cooked_proportions: Array[float]
 var _thermometer_fill_proportion := 0.0
 var _thermometer_is_raising := false
@@ -43,7 +43,7 @@ func _stop_thermometer() -> void:
 	_thermometer_is_paused = true
 	get_tree().create_timer(1.0).timeout.connect(func() -> void:
 		_thermometer_is_paused = false
-		if layer_cooked_proportions.size() == _ORDER_LAYER_COUNT:
+		if layer_cooked_proportions.size() == layer_count:
 			completed.emit()
 	)
 	layer_cooked_proportions.append(_thermometer_fill_proportion)
@@ -52,7 +52,7 @@ func _stop_thermometer() -> void:
 func _update_ui() -> void:
 	for i in Util.MAX_LAYER_COUNT:
 		var pan := _pans_control.get_child(i) as Panel
-		var layer_is_in_order := i < _ORDER_LAYER_COUNT
+		var layer_is_in_order := i < layer_count
 		var layer_is_cooked := i < layer_cooked_proportions.size()
 		var layer_is_cooking := (
 			_thermometer_is_raising and i == layer_cooked_proportions.size()
@@ -64,7 +64,7 @@ func _update_ui() -> void:
 		_update_layer(i)
 	_update_thermometer()
 	var cooked_all_layers := (
-		layer_cooked_proportions.size() == _ORDER_LAYER_COUNT
+		layer_cooked_proportions.size() == layer_count
 	)
 	_bake_button.disabled = (
 		_thermometer_is_paused
