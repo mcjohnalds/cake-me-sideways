@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnyvqqdcult6t"]
+[gd_scene load_steps=2 format=3 uid="uid://dnyvqqdcult6t"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_tsjiu"]
-[ext_resource type="PackedScene" uid="uid://bf13fw4a182df" path="res://bake_screen.tscn" id="2_wqq0c"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -20,6 +19,3 @@ offset_right = 90.0
 offset_bottom = 60.0
 theme_override_font_sizes/font_size = 30
 text = "Bake"
-
-[node name="BakeScreen" parent="." instance=ExtResource("2_wqq0c")]
-layout_mode = 1

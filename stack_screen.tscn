@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://civwmv5k2e5rl"]
+
+[ext_resource type="Script" path="res://stack_screen.gd" id="1_a21pp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_djrnx"]
+
+[node name="StackScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a21pp")
+
+[node name="DropZone" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 100.0
+offset_top = 110.0
+offset_right = 700.0
+offset_bottom = 420.0
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 420.0
+offset_right = 700.0
+offset_bottom = 430.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_djrnx")
+
+[node name="DropButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 330.0
+offset_top = 450.0
+offset_right = 470.0
+offset_bottom = 490.0
+text = "Drop"

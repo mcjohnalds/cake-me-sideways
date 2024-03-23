@@ -5,8 +5,7 @@ signal completed
 const _PERFECT_COOKED_AMOUNT := 0.7
 const _PERFECT_COOKED_THRESHOLD := 0.1
 const _ORDER_LAYER_COUNT := 2
-const _MAX_LAYER_COUNT := 4
-var layer_cooked_amounts: Array[float] = []
+var layer_cooked_amounts: Array[float]
 var _thermometer_fill_ratio := 0.0
 var _thermometer_is_raising := false
 var _thermometer_is_paused := false
@@ -31,7 +30,7 @@ func _bake_button_pressed() -> void:
 
 func _process(delta: float) -> void:
 	if _thermometer_is_raising:
-		_thermometer_fill_ratio += (0.3 + _thermometer_fill_ratio * 2.0) * delta
+		_thermometer_fill_ratio += (0.05 + _thermometer_fill_ratio * 5.0) * delta
 		if _thermometer_fill_ratio >= 1.0:
 			_thermometer_fill_ratio = 1.0
 			_stop_thermometer()
@@ -41,7 +40,7 @@ func _process(delta: float) -> void:
 func _stop_thermometer() -> void:
 	_thermometer_is_raising = false
 	_thermometer_is_paused = true
-	get_tree().create_timer(2.0).timeout.connect(func() -> void:
+	get_tree().create_timer(1.0).timeout.connect(func() -> void:
 		_thermometer_is_paused = false
 		if layer_cooked_amounts.size() == _ORDER_LAYER_COUNT:
 			completed.emit()
@@ -50,7 +49,7 @@ func _stop_thermometer() -> void:
 
 
 func _update_ui() -> void:
-	for i in _MAX_LAYER_COUNT:
+	for i in Util.MAX_LAYER_COUNT:
 		var pan := _pans_control.get_child(i) as Panel
 		var layer_is_in_order := i < _ORDER_LAYER_COUNT
 		var layer_is_cooked := i < layer_cooked_amounts.size()
@@ -60,7 +59,7 @@ func _update_ui() -> void:
 		pan.visible = (
 			layer_is_in_order and not layer_is_cooked and not layer_is_cooking
 		)
-	for i in _MAX_LAYER_COUNT:
+	for i in Util.MAX_LAYER_COUNT:
 		_update_layer(i)
 	_update_thermometer()
 	var cooked_all_layers := (
@@ -77,18 +76,12 @@ func _update_ui() -> void:
 
 
 func _update_layer(layer_index: int) -> void:
-	var layer_control: Control = _layers_control.get_child(layer_index)
+	var layer: Layer = _layers_control.get_child(layer_index)
 	if layer_cooked_amounts.size() > layer_index:
-		layer_control.visible = true
-		var style_box: StyleBoxFlat = (
-			_layers_control
-				.get_child(layer_index)
-				.get_node("OvercookedPanel")
-				.get("theme_override_styles/panel")
-		)
-		style_box.bg_color.a = layer_cooked_amounts[layer_index] ** 2
+		layer.visible = true
+		layer.cooked_ratio = layer_cooked_amounts[layer_index] ** 2.0
 	else:
-		layer_control.visible = false
+		layer.visible = false
 
 
 func _update_thermometer() -> void:

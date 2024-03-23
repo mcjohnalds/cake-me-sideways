@@ -1,11 +1,25 @@
 class_name Main extends Control
 
-@onready var _bake_screen: BakeScreen = $BakeScreen
-@onready var _active_screen: Control = _bake_screen
+const _bake_screen_scene := preload("res://bake_screen.tscn")
+const _stack_screen_scene := preload("res://stack_screen.tscn")
+@onready var _screen_title: Label = $ScreenTitle
 
 
 func _ready() -> void:
-	_bake_screen.completed.connect(_on_bake_screen_completed)
+	var bake_screen: BakeScreen = _bake_screen_scene.instantiate()
+	bake_screen.completed.connect(func() -> void:
+		bake_screen.queue_free()
+		_screen_title.text = "Stack"
+		var stack_screen: StackScreen = _stack_screen_scene.instantiate()
+		stack_screen.layer_cooked_amounts = bake_screen.layer_cooked_amounts
+		add_child(stack_screen)
+	)
+	add_child(bake_screen)
+
+	#_screen_title.text = "Stack"
+	#var stack_screen: StackScreen = _stack_screen_scene.instantiate()
+	#stack_screen.layer_cooked_amounts = [0.1, 0.5, 0.8]
+	#add_child(stack_screen)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -13,15 +27,3 @@ func _unhandled_input(event: InputEvent) -> void:
 		var k := event as InputEventKey
 		if k.pressed and k.keycode == KEY_ESCAPE:
 			get_tree().quit()
-
-
-func _process(_delta: float) -> void:
-	_update_ui()
-
-
-func _on_bake_screen_completed() -> void:
-	_active_screen = null
-
-
-func _update_ui() -> void:
-	_bake_screen.visible = _active_screen == _bake_screen
