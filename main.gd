@@ -46,10 +46,18 @@ func _stop_thermometer() -> void:
 
 
 func _update_ui() -> void:
-	$Pans/Panel1.visible = true
-	$Pans/Panel2.visible = true
-	$Pans/Panel3.visible = _ORDER_LAYER_COUNT > 2
-	$Pans/Panel4.visible = _ORDER_LAYER_COUNT > 3
+	$Pans/Panel1.visible = (
+		_layer_cooked_amounts.size() < 1
+	)
+	$Pans/Panel2.visible = (
+		_layer_cooked_amounts.size() < 2
+	)
+	$Pans/Panel3.visible = (
+		_layer_cooked_amounts.size() < 3 and _ORDER_LAYER_COUNT > 2
+	)
+	$Pans/Panel4.visible = (
+		_layer_cooked_amounts.size() < 4 and _ORDER_LAYER_COUNT > 3
+	)
 	for i in 4:
 		_update_layer(i)
 	_update_thermometer()
@@ -79,7 +87,7 @@ func _update_layer(layer_index: int) -> void:
 				.get_node("OvercookedPanel")
 				["theme_override_styles/panel"]
 		)
-		style_box.bg_color.a = _layer_cooked_amounts[layer_index]
+		style_box.bg_color.a = _layer_cooked_amounts[layer_index] ** 2
 	else:
 		$Layers.get_child(layer_index).visible = false
 
