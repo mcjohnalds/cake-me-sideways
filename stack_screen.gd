@@ -1,7 +1,9 @@
 class_name StackScreen extends Control
 
+signal completed
+
 const _layer_scene := preload("res://layer.tscn")
-var layer_cooked_amounts: Array[float]
+var layer_cooked_proportions: Array[float]
 var _layers: Array[Layer] = []
 var _layer_movement_direction := 1.0
 var _is_complete := false
@@ -13,7 +15,7 @@ func _ready() -> void:
 	_drop_button.pressed.connect(_on_drop_button_pressed)
 	var layer: Layer = _layer_scene.instantiate()
 	layer.layer_index = 0
-	layer.cooked_ratio = layer_cooked_amounts[0]
+	layer.cooked_proportion = layer_cooked_proportions[0]
 	_drop_zone.add_child(layer)
 	_layers.append(layer)
 
@@ -30,14 +32,17 @@ func _on_drop_button_pressed() -> void:
 	else:
 		_layers[-1].position.y = _layers[-2].position.y - _layers[-1].size.y
 
-	if _layers.size() < layer_cooked_amounts.size():
+	if _layers.size() < layer_cooked_proportions.size():
 		var new_layer: Layer = _layer_scene.instantiate()
 		new_layer.layer_index = _layers.size()
-		new_layer.cooked_ratio = layer_cooked_amounts[_layers.size()]
+		new_layer.cooked_proportion = layer_cooked_proportions[_layers.size()]
 		_drop_zone.add_child(new_layer)
 		_layers.append(new_layer)
 	else:
 		_is_complete = true
+		get_tree().create_timer(1.0).timeout.connect(func() -> void:
+			completed.emit()
+		)
 
 
 func _move_top_layer_side_to_side(delta: float) -> void:
