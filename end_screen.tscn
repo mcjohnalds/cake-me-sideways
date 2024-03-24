@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c78aeayv3ksj5"]
+[gd_scene load_steps=4 format=3 uid="uid://c78aeayv3ksj5"]
 
 [ext_resource type="Script" path="res://end_screen.gd" id="1_3l4ah"]
 [ext_resource type="Texture2D" uid="uid://cnoitjhwysskt" path="res://panel_edited.png" id="2_2agey"]
-[ext_resource type="Texture2D" uid="uid://5ri65x4lip8p" path="res://button.png" id="3_tdsll"]
-[ext_resource type="Texture2D" uid="uid://prlbwss8pk5r" path="res://button_pressed.png" id="4_aayfi"]
+[ext_resource type="PackedScene" uid="uid://bewuefnblvty0" path="res://my_button.tscn" id="3_p3jgr"]
 
 [node name="EndScreen" type="Control"]
 layout_mode = 3
@@ -15,6 +14,7 @@ grow_vertical = 2
 script = ExtResource("1_3l4ah")
 
 [node name="Card" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 320.0
 offset_top = 110.0
 offset_right = 640.0
@@ -51,24 +51,9 @@ text = "$0"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="OkButton" type="TextureButton" parent="."]
+[node name="OkButton" parent="." instance=ExtResource("3_p3jgr")]
+layout_mode = 0
 offset_left = 360.0
 offset_top = 410.0
 offset_right = 440.0
 offset_bottom = 490.0
-disabled = true
-texture_normal = ExtResource("3_tdsll")
-texture_pressed = ExtResource("4_aayfi")
-texture_disabled = ExtResource("4_aayfi")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="OkButton"]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 29.0
-offset_right = 76.0
-offset_bottom = 54.0
-theme_override_font_sizes/font_size = 18
-text = "OK"
-horizontal_alignment = 1

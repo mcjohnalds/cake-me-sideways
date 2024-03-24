@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://dll7xw55q2k68"]
+
+[ext_resource type="AudioStream" uid="uid://ccr0yxjlxhtt2" path="res://hungarian_dance_no_5.ogg" id="1_lct8c"]
+[ext_resource type="Script" path="res://autoload.gd" id="1_yh4ro"]
+[ext_resource type="AudioStream" uid="uid://clocp0vlalf82" path="res://button_down.ogg" id="3_difqv"]
+[ext_resource type="AudioStream" uid="uid://f26ne0f3gyrx" path="res://button_up.ogg" id="4_rtk1p"]
+
+[node name="Autoload" type="Node"]
+script = ExtResource("1_yh4ro")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_lct8c")
+autoplay = true
+
+[node name="Down" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_difqv")
+
+[node name="Up" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_rtk1p")

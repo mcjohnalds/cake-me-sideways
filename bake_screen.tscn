@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bf13fw4a182df"]
+[gd_scene load_steps=10 format=3 uid="uid://bf13fw4a182df"]
 
 [ext_resource type="Script" path="res://bake_screen.gd" id="1_g4ybv"]
 [ext_resource type="Texture2D" uid="uid://cnoitjhwysskt" path="res://panel_edited.png" id="2_0dv1o"]
@@ -7,8 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://qt0lwearvnyg" path="res://oven.png" id="4_ob2t1"]
 [ext_resource type="Texture2D" uid="uid://wmit5eqv702q" path="res://thermometer_foreground.png" id="5_21d27"]
 [ext_resource type="Texture2D" uid="uid://dtgp1oyq7o76u" path="res://thermometer_background.png" id="6_gbos5"]
-[ext_resource type="Texture2D" uid="uid://5ri65x4lip8p" path="res://button.png" id="7_20rmg"]
-[ext_resource type="Texture2D" uid="uid://prlbwss8pk5r" path="res://button_pressed.png" id="8_pnp7f"]
+[ext_resource type="PackedScene" uid="uid://bewuefnblvty0" path="res://my_button.tscn" id="8_hct7a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqx8n"]
 bg_color = Color(0.4, 0.537255, 0, 0.901961)
@@ -170,28 +169,6 @@ offset_bottom = 136.0
 texture = ExtResource("6_gbos5")
 expand_mode = 1
 
-[node name="BakeButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 360.0
-offset_top = 410.0
-offset_right = 440.0
-offset_bottom = 490.0
-texture_normal = ExtResource("7_20rmg")
-texture_pressed = ExtResource("8_pnp7f")
-texture_disabled = ExtResource("8_pnp7f")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="BakeButton"]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 29.0
-offset_right = 76.0
-offset_bottom = 54.0
-theme_override_font_sizes/font_size = 18
-text = "BAKE"
-horizontal_alignment = 1
-
 [node name="ScreenTitle3" type="Label" parent="."]
 layout_mode = 0
 offset_left = 470.0
@@ -202,3 +179,11 @@ theme_override_constants/outline_size = 1
 theme_override_font_sizes/font_size = 14
 text = "Temperature"
 horizontal_alignment = 1
+
+[node name="BakeButton" parent="." instance=ExtResource("8_hct7a")]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 410.0
+offset_right = 440.0
+offset_bottom = 490.0
+text = "BAKE"
