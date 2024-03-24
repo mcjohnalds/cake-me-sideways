@@ -1,5 +1,5 @@
 @tool
-class_name OrderCard extends Panel
+class_name OrderCard extends Control
 
 signal accepted
 
@@ -26,8 +26,8 @@ signal accepted
 func _ready() -> void:
 	_layers_label = $LayersLabel
 	_reward_label = $RewardLabel
-	var accept_button: Button = $AcceptButton
-	accept_button.pressed.connect(func() -> void: accepted.emit())
+	var take_button: BaseButton = $TakeButton
+	take_button.pressed.connect(func() -> void: accepted.emit())
 	_update_ui()
 
 

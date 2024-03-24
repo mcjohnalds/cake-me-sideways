@@ -4,12 +4,12 @@ class_name RatingScreen extends Control
 signal completed
 
 var reward: int
-@onready var _stars_fill: Label = $StarsFill
-@onready var _reward_label: Label = $RewardLabel
-@onready var _star_bonus_label: Label = $StarBonusLabel
-@onready var _total_label: Label = $TotalLabel
+@onready var _quality_label: Label = $RatingCard/QualityLabel
+@onready var _reward_label: Label = $RatingCard/RewardLabel
+@onready var _quality_bonus_label: Label = $RatingCard/QualityBonusLabel
+@onready var _total_label: Label = $RatingCard/TotalLabel
 @onready var _layers: Control = $Layers
-@onready var _ok_button: Button = $OkButton
+@onready var _ok_button: BaseButton = $OkButton
 
 
 @export var layer_cooked_proportions: Array[float]:
@@ -36,8 +36,8 @@ var reward: int
 		return layer_position_xs
 
 
-func get_star_bonus() -> int:
-	return roundi(float(reward) * (float(_get_star_score()) ** 2.0))
+func get_quality_bonus() -> int:
+	return roundi(float(reward) * (float(_get_quality_score()) ** 2.0))
 
 
 func _ready() -> void:
@@ -49,19 +49,15 @@ func _update_ui() -> void:
 	if not is_node_ready():
 		return
 
-	var star_score := _get_star_score()
-	var star_count := roundi(star_score * 5.0)
-	var stars_str := ""
-	for i in star_count:
-		stars_str += "★ "
-	_stars_fill.text = stars_str
+	var quality_score := _get_quality_score()
+	_quality_label.text = "%d/5" % roundi(quality_score * 5.0)
 
 	_reward_label.text = "$%s" % reward
 
-	var star_bonus := get_star_bonus()
-	_star_bonus_label.text = "$%s" % star_bonus
+	var quality_bonus := get_quality_bonus()
+	_quality_bonus_label.text = "$%s" % quality_bonus
 
-	_total_label.text = "$%s" % (reward + star_bonus)
+	_total_label.text = "$%s" % (reward + quality_bonus)
 
 	_update_layers_ui()
 
@@ -81,8 +77,8 @@ func _update_layers_ui() -> void:
 			layer.visible = false
 
 
-# star_score is between 0.0 and 1.0 (inclusive)
-func _get_star_score() -> float:
+# quality_score is between 0.0 and 1.0 (inclusive)
+func _get_quality_score() -> float:
 	var bake_score := _calculate_score_from_proportions(
 		layer_cooked_proportions, Util.PERFECT_COOKED_PROPORTION
 	)

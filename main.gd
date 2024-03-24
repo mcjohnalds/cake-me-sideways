@@ -98,7 +98,7 @@ func _on_stack_screen_completed() -> void:
 
 
 func _on_rating_screen_completed() -> void:
-	_money += _reward + _rating_screen.get_star_bonus()
+	_money += _reward + _rating_screen.get_quality_bonus()
 	_rating_screen.queue_free()
 
 	_go_to_orders_screen()

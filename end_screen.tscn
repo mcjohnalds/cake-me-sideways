@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c78aeayv3ksj5"]
+[gd_scene load_steps=5 format=3 uid="uid://c78aeayv3ksj5"]
 
 [ext_resource type="Script" path="res://end_screen.gd" id="1_3l4ah"]
+[ext_resource type="Texture2D" uid="uid://cnoitjhwysskt" path="res://panel_edited.png" id="2_2agey"]
+[ext_resource type="Texture2D" uid="uid://5ri65x4lip8p" path="res://button.png" id="3_tdsll"]
+[ext_resource type="Texture2D" uid="uid://prlbwss8pk5r" path="res://button_pressed.png" id="4_aayfi"]
 
 [node name="EndScreen" type="Control"]
 layout_mode = 3
@@ -11,44 +14,61 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3l4ah")
 
-[node name="Label" type="Label" parent="."]
+[node name="Card" type="TextureRect" parent="."]
+offset_left = 320.0
+offset_top = 110.0
+offset_right = 640.0
+offset_bottom = 300.0
+texture = ExtResource("2_2agey")
+expand_mode = 1
+
+[node name="Label1" type="Label" parent="Card"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -180.0
-offset_top = -70.0
-offset_right = 27.0
-offset_bottom = -15.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 238.0
+offset_bottom = 75.0
 theme_override_font_sizes/font_size = 40
 text = "Final Score"
 
-[node name="FinalScoreLabel" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 70.0
-offset_top = -70.0
-offset_right = 180.0
-offset_bottom = -15.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 40
-text = "$123"
-horizontal_alignment = 2
-
-[node name="OkButton" type="Button" parent="."]
+[node name="Panel2" type="Panel" parent="Card"]
 layout_mode = 0
-offset_left = 300.0
-offset_top = 290.0
-offset_right = 660.0
-offset_bottom = 347.0
-theme_override_font_sizes/font_size = 35
-text = "Ok"
+offset_left = 20.0
+offset_top = 90.0
+offset_right = 300.0
+offset_bottom = 160.0
+theme_type_variation = &"7SegPanel"
+
+[node name="FinalScoreLabel" type="Label" parent="Card"]
+layout_mode = 0
+offset_left = 213.0
+offset_top = 102.0
+offset_right = 285.0
+offset_bottom = 149.0
+theme_type_variation = &"7SegLabel"
+theme_override_font_sizes/font_size = 45
+text = "$0"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="OkButton" type="TextureButton" parent="."]
+offset_left = 360.0
+offset_top = 410.0
+offset_right = 440.0
+offset_bottom = 490.0
+disabled = true
+texture_normal = ExtResource("3_tdsll")
+texture_pressed = ExtResource("4_aayfi")
+texture_disabled = ExtResource("4_aayfi")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="OkButton"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 29.0
+offset_right = 76.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 18
+text = "OK"
+horizontal_alignment = 1

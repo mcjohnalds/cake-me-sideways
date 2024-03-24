@@ -8,7 +8,7 @@ var _layers: Array[Layer] = []
 var _layer_movement_direction := 1.0
 var _is_complete := false
 @onready var _drop_zone: Control = $DropZone
-@onready var _drop_button: Button = $DropButton
+@onready var _drop_button: BaseButton = $DropButton
 
 # Returns array arr where arr[i] is the distance from the top-left x coordinate
 # of layer i from the top-left coordinate of layer i-1.

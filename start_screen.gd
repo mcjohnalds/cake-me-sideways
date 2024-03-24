@@ -2,7 +2,7 @@ class_name StartScreen extends Control
 
 signal start_button_pressed
 
-@onready var _start_button: Button = $Button
+@onready var _start_button: BaseButton = $StartButton
 
 
 func _ready() -> void:

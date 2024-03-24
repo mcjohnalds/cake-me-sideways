@@ -112,18 +112,18 @@ layer_index = 3
 [node name="TextureRect2" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 465.0
-offset_top = 370.0
+offset_top = 380.0
 offset_right = 585.0
-offset_bottom = 530.0
+offset_bottom = 540.0
 texture = ExtResource("2_0dv1o")
 expand_mode = 1
 
 [node name="Thermometer" type="Control" parent="."]
 anchors_preset = 0
 offset_left = 490.0
-offset_top = 370.0
+offset_top = 380.0
 offset_right = 560.0
-offset_bottom = 506.0
+offset_bottom = 516.0
 
 [node name="Glass" type="TextureRect" parent="Thermometer"]
 layout_mode = 0
@@ -193,10 +193,11 @@ text = "BAKE"
 horizontal_alignment = 1
 
 [node name="ScreenTitle3" type="Label" parent="."]
+layout_mode = 0
 offset_left = 470.0
-offset_top = 503.0
+offset_top = 513.0
 offset_right = 580.0
-offset_bottom = 534.0
+offset_bottom = 544.0
 theme_override_constants/outline_size = 1
 theme_override_font_sizes/font_size = 14
 text = "Temperature"

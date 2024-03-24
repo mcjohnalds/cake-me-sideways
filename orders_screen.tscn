@@ -15,20 +15,20 @@ script = ExtResource("1_48re7")
 [node name="OrderCard1" parent="." instance=ExtResource("2_rbdf2")]
 layout_mode = 0
 offset_left = 60.0
-offset_top = 160.0
+offset_top = 80.0
 offset_right = 290.0
-offset_bottom = 390.0
+offset_bottom = 340.0
 
 [node name="OrderCard2" parent="." instance=ExtResource("2_rbdf2")]
 layout_mode = 0
 offset_left = 370.0
-offset_top = 160.0
+offset_top = 80.0
 offset_right = 600.0
-offset_bottom = 390.0
+offset_bottom = 340.0
 
 [node name="OrderCard3" parent="." instance=ExtResource("2_rbdf2")]
 layout_mode = 0
 offset_left = 680.0
-offset_top = 160.0
+offset_top = 80.0
 offset_right = 910.0
-offset_bottom = 390.0
+offset_bottom = 340.0
