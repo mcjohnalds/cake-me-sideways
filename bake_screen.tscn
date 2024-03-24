@@ -1,43 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://bf13fw4a182df"]
+[gd_scene load_steps=11 format=3 uid="uid://bf13fw4a182df"]
 
 [ext_resource type="Script" path="res://bake_screen.gd" id="1_g4ybv"]
+[ext_resource type="Texture2D" uid="uid://cnoitjhwysskt" path="res://panel_edited.png" id="2_0dv1o"]
 [ext_resource type="PackedScene" uid="uid://cr8fuisaekftg" path="res://layer.tscn" id="2_3vss3"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lccqg"]
-bg_color = Color(0.672064, 0.672064, 0.672064, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wn2ut"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fjfx7"]
-bg_color = Color(0.898039, 0, 0.196078, 1)
-draw_center = false
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
+[ext_resource type="Texture2D" uid="uid://doa3pbyj0xnun" path="res://pan_edited.png" id="2_ueowu"]
+[ext_resource type="Texture2D" uid="uid://qt0lwearvnyg" path="res://oven.png" id="4_ob2t1"]
+[ext_resource type="Texture2D" uid="uid://wmit5eqv702q" path="res://thermometer_foreground.png" id="5_21d27"]
+[ext_resource type="Texture2D" uid="uid://dtgp1oyq7o76u" path="res://thermometer_background.png" id="6_gbos5"]
+[ext_resource type="Texture2D" uid="uid://5ri65x4lip8p" path="res://button.png" id="7_20rmg"]
+[ext_resource type="Texture2D" uid="uid://prlbwss8pk5r" path="res://button_pressed.png" id="8_pnp7f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqx8n"]
-bg_color = Color(0.898039, 0, 0.196078, 1)
-border_width_left = 2
+bg_color = Color(0.4, 0.537255, 0, 0.901961)
 border_width_top = 2
-border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gtjrt"]
-bg_color = Color(0.239216, 0.568627, 0, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
+border_color = Color(0.4, 0.537255, 0, 0)
+border_blend = true
 
 [node name="BakeScreen" type="Control"]
 layout_mode = 3
@@ -51,62 +29,61 @@ script = ExtResource("1_g4ybv")
 [node name="Pans" type="Control" parent="."]
 anchors_preset = 0
 offset_left = 200.0
-offset_top = 100.0
+offset_top = 80.0
 offset_right = 240.0
-offset_bottom = 140.0
+offset_bottom = 120.0
 
-[node name="Panel1" type="Panel" parent="Pans"]
+[node name="Pan1" type="TextureRect" parent="Pans"]
 layout_mode = 0
-offset_left = -10.0
-offset_top = 150.0
-offset_right = 110.0
-offset_bottom = 190.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_lccqg")
+offset_left = -15.0
+offset_top = 149.0
+offset_right = 115.0
+offset_bottom = 192.0
+texture = ExtResource("2_ueowu")
+expand_mode = 1
 
-[node name="Panel2" type="Panel" parent="Pans"]
+[node name="Pan2" type="TextureRect" parent="Pans"]
 layout_mode = 0
+offset_left = -6.0
+offset_top = 99.0
+offset_right = 106.0
+offset_bottom = 142.0
+texture = ExtResource("2_ueowu")
+expand_mode = 1
+
+[node name="Pan3" type="TextureRect" parent="Pans"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 49.0
+offset_right = 95.0
+offset_bottom = 92.0
+texture = ExtResource("2_ueowu")
+expand_mode = 1
+
+[node name="Pan4" type="TextureRect" parent="Pans"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = -1.0
+offset_right = 84.0
+offset_bottom = 42.0
+texture = ExtResource("2_ueowu")
+expand_mode = 1
+
+[node name="Oven" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 390.0
 offset_top = 100.0
-offset_right = 100.0
-offset_bottom = 140.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_lccqg")
-
-[node name="Panel3" type="Panel" parent="Pans"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 50.0
-offset_right = 90.0
-offset_bottom = 90.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_lccqg")
-
-[node name="Panel4" type="Panel" parent="Pans"]
-layout_mode = 0
-offset_left = 20.0
-offset_right = 80.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_lccqg")
-
-[node name="Oven" type="Panel" parent="."]
-layout_mode = 0
-offset_left = 410.0
-offset_top = 140.0
-offset_right = 540.0
+offset_right = 560.0
 offset_bottom = 270.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_wn2ut")
-
-[node name="Label" type="Label" parent="Oven"]
-layout_mode = 0
-offset_right = 130.0
-offset_bottom = 130.0
-text = "Oven"
-horizontal_alignment = 1
-vertical_alignment = 1
+texture = ExtResource("4_ob2t1")
+expand_mode = 1
 
 [node name="Layers" type="Control" parent="."]
 anchors_preset = 0
 offset_left = 650.0
-offset_top = 100.0
+offset_top = 80.0
 offset_right = 690.0
-offset_bottom = 140.0
+offset_bottom = 120.0
 
 [node name="Layer1" parent="Layers" instance=ExtResource("2_3vss3")]
 offset_left = -10.0
@@ -132,37 +109,95 @@ offset_left = 20.0
 offset_right = 80.0
 layer_index = 3
 
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 465.0
+offset_top = 370.0
+offset_right = 585.0
+offset_bottom = 530.0
+texture = ExtResource("2_0dv1o")
+expand_mode = 1
+
 [node name="Thermometer" type="Control" parent="."]
 anchors_preset = 0
 offset_left = 490.0
-offset_top = 360.0
-offset_right = 530.0
-offset_bottom = 490.0
+offset_top = 370.0
+offset_right = 560.0
+offset_bottom = 506.0
 
-[node name="Outline" type="Panel" parent="Thermometer"]
+[node name="Glass" type="TextureRect" parent="Thermometer"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 130.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_fjfx7")
+offset_left = -1.0
+offset_right = 69.0
+offset_bottom = 136.0
+texture = ExtResource("6_gbos5")
+expand_mode = 1
 
-[node name="FillPanel" type="Panel" parent="Thermometer"]
+[node name="Fill" type="Control" parent="Thermometer"]
+clip_contents = true
+anchors_preset = 0
+offset_left = -1.0
+offset_top = 34.0
+offset_right = 69.0
+offset_bottom = 136.0
+
+[node name="TextureRect" type="TextureRect" parent="Thermometer/Fill"]
+modulate = Color(1, 1, 1, 0.92549)
 layout_mode = 1
-offset_top = 90.0
-offset_right = 40.0
-offset_bottom = 130.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -136.0
+offset_right = 70.0
+grow_vertical = 0
+texture = ExtResource("5_21d27")
+expand_mode = 1
+
+[node name="Perfect" type="Panel" parent="Thermometer"]
+layout_mode = 1
+offset_left = 22.0
+offset_top = 30.0
+offset_right = 48.0
+offset_bottom = 43.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_qqx8n")
 
-[node name="PerfectPanel" type="Panel" parent="Thermometer"]
+[node name="Glass2" type="TextureRect" parent="Thermometer"]
+modulate = Color(1, 1, 1, 0.662745)
 layout_mode = 0
-offset_top = 30.0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_gtjrt")
+offset_left = -1.0
+offset_right = 69.0
+offset_bottom = 136.0
+texture = ExtResource("6_gbos5")
+expand_mode = 1
 
-[node name="BakeButton" type="Button" parent="."]
+[node name="BakeButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 340.0
-offset_top = 400.0
-offset_right = 430.0
-offset_bottom = 450.0
-text = "Bake!"
+offset_left = 360.0
+offset_top = 410.0
+offset_right = 440.0
+offset_bottom = 490.0
+texture_normal = ExtResource("7_20rmg")
+texture_pressed = ExtResource("8_pnp7f")
+texture_disabled = ExtResource("8_pnp7f")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="BakeButton"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 29.0
+offset_right = 76.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 18
+text = "BAKE"
+horizontal_alignment = 1
+
+[node name="ScreenTitle3" type="Label" parent="."]
+offset_left = 470.0
+offset_top = 503.0
+offset_right = 580.0
+offset_bottom = 534.0
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 14
+text = "Temperature"
+horizontal_alignment = 1

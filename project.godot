@@ -34,6 +34,7 @@ window/stretch/mode="canvas_items"
 [gui]
 
 theme/custom="res://main.tres"
+theme/custom_font="res://Lato-Regular.ttf"
 
 [rendering]
 

@@ -31,7 +31,7 @@ var _money: int:
 
 func _ready() -> void:
 	_money = 0
-	_screen_title.text = "Cook Me Sideways"
+	_screen_title.text = "READY"
 	_money_label.visible = false
 	_start_screen = _start_screen_scene.instantiate()
 	_start_screen.start_button_pressed.connect(_on_start_button_pressed)
@@ -49,7 +49,7 @@ func _on_start_button_pressed() -> void:
 
 
 func _go_to_orders_screen() -> void:
-	_screen_title.text = "Orders"
+	_screen_title.text = "ORDERS"
 	_orders_screen = _orders_screen_scene.instantiate()
 	_orders_screen.order_accepted.connect(_on_order_accepted)
 	_screen_container.add_child(_orders_screen)
@@ -59,7 +59,7 @@ func _on_order_accepted(layer_count: int, reward: int) -> void:
 	_reward = reward
 	_remove_screen()
 
-	_screen_title.text = "Bake"
+	_screen_title.text = "BAKE"
 	_bake_screen = _bake_screen_scene.instantiate()
 	_bake_screen.layer_count = layer_count
 	_bake_screen.completed.connect(_on_bake_screen_completed)
@@ -69,7 +69,7 @@ func _on_order_accepted(layer_count: int, reward: int) -> void:
 func _on_bake_screen_completed() -> void:
 	_remove_screen()
 
-	_screen_title.text = "Stack"
+	_screen_title.text = "STACK"
 	_stack_screen = _stack_screen_scene.instantiate()
 	_stack_screen.layer_cooked_proportions = (
 		_bake_screen.layer_cooked_proportions
@@ -81,7 +81,7 @@ func _on_bake_screen_completed() -> void:
 func _on_stack_screen_completed() -> void:
 	_remove_screen()
 
-	_screen_title.text = "Rating"
+	_screen_title.text = "RATING"
 	_rating_screen = _rating_screen_scene.instantiate()
 	_rating_screen.reward = _reward
 	_rating_screen.layer_position_xs = (
@@ -107,7 +107,7 @@ func _on_rating_screen_completed() -> void:
 func _go_to_end_screen() -> void:
 	_remove_screen()
 
-	_screen_title.text = "End"
+	_screen_title.text = "END"
 	_money_label.visible = false
 	_time_label.visible = false
 	var end_screen: EndScreen = _end_screen_scene.instantiate()

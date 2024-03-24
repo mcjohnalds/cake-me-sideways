@@ -1,9 +1,31 @@
-[gd_resource type="Theme" format=3 uid="uid://bik2ukourrask"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bik2ukourrask"]
+
+[ext_resource type="FontFile" uid="uid://cytirtui4nudj" path="res://seven_segment.ttf" id="1_mdecg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_egne7"]
+bg_color = Color(0.101961, 0.101961, 0.101961, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.517647, 0.517647, 0.517647, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 6
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 6
 
 [resource]
+7SegLabel/base_type = &"Label"
+7SegLabel/colors/font_color = Color(0.8, 0, 0.0117647, 1)
+7SegLabel/colors/font_outline_color = Color(0.8, 0.288, 0.296533, 0.552941)
+7SegLabel/constants/outline_size = 1
+7SegLabel/fonts/font = ExtResource("1_mdecg")
+7SegPanel/base_type = &"Panel"
+7SegPanel/styles/panel = SubResource("StyleBoxFlat_egne7")
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/constants/outline_size = 3
 Button/font_sizes/font_size = 20
-Label/colors/font_outline_color = Color(0, 0, 0, 1)
-Label/constants/outline_size = 4
+Label/colors/font_color = Color(0.0392157, 0.0392157, 0.0392157, 1)
+Label/colors/font_outline_color = Color(0.345098, 0.345098, 0.345098, 1)
+Label/constants/outline_size = 3
 Label/font_sizes/font_size = 20

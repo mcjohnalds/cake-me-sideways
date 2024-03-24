@@ -1,12 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cr8fuisaekftg"]
+[gd_scene load_steps=3 format=3 uid="uid://cr8fuisaekftg"]
 
 [ext_resource type="Script" path="res://layer.gd" id="1_34r3o"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ea5ne"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jb36x"]
-bg_color = Color(0.772549, 0.486275, 0.278431, 0.701961)
+[ext_resource type="Texture2D" uid="uid://b0flim5jbofgo" path="res://layer.png" id="2_mf1c1"]
 
 [node name="Layer" type="Control"]
 custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
@@ -15,25 +10,19 @@ anchors_preset = 0
 offset_right = 120.0
 offset_bottom = 40.0
 script = ExtResource("1_34r3o")
+cooked_proportion = 1.0
 
-[node name="UndercookedPanel" type="Panel" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.301961, 0.207843, 0.133333, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -11.0
+offset_right = 10.0
+offset_bottom = 11.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_ea5ne")
-
-[node name="OvercookedPanel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_jb36x")
+texture = ExtResource("2_mf1c1")
+expand_mode = 1
