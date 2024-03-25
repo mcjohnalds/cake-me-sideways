@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnyvqqdcult6t"]
+[gd_scene load_steps=7 format=3 uid="uid://dnyvqqdcult6t"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_tsjiu"]
 [ext_resource type="Texture2D" uid="uid://c7kc6d6ohcpjg" path="res://kitchen_edited.png" id="2_s56v5"]
 [ext_resource type="Texture2D" uid="uid://cnoitjhwysskt" path="res://panel_edited.png" id="3_02g2o"]
 [ext_resource type="FontFile" uid="uid://dxepbybic4nnx" path="res://Lato-BoldItalic.ttf" id="4_cxiq6"]
+[ext_resource type="AudioStream" uid="uid://cbsydmy2kkduv" path="res://ticking.ogg" id="5_qsaos"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rd2y2"]
 bg_color = Color(1, 1, 1, 0.490196)
@@ -138,3 +139,6 @@ theme_override_font_sizes/font_size = 30
 text = "2:00"
 horizontal_alignment = 2
 vertical_alignment = 2
+
+[node name="TickingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_qsaos")

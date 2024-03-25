@@ -19,6 +19,7 @@ var _has_ended := false
 @onready var _screen_title: Label = $ScreenTitle
 @onready var _money_label: Label = $MoneyLabel
 @onready var _time_label: Label = $TimeLabel
+@onready var _ticking_sound: AudioStreamPlayer = $TickingSound
 
 
 var _money: int:
@@ -109,19 +110,24 @@ func _go_to_end_screen() -> void:
 
 	_screen_title.text = "END"
 	_money_label.visible = false
-	_time_label.visible = false
 	var end_screen: EndScreen = _end_screen_scene.instantiate()
 	end_screen.completed.connect(func() -> void:
 		get_tree().reload_current_scene()
 	)
 	_screen_container.add_child(end_screen)
+	while true:
+		_time_label.visible = !_time_label.visible
+		await get_tree().create_timer(1.0).timeout
 
 
 func _process(_delta: float) -> void:
 	if _has_started and not _has_ended:
 		var seconds_passed := Util.time() - _started_at
 		var seconds_remaining := 2 * 60 - floori(seconds_passed)
+		if seconds_remaining < 30 and not _ticking_sound.playing:
+			_ticking_sound.play()
 		if seconds_remaining < 0:
+			_ticking_sound.stop()
 			_has_ended = true
 			_go_to_end_screen()
 			return

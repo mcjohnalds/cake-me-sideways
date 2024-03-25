@@ -9,6 +9,7 @@ var _layer_movement_direction := 1.0
 var _is_complete := false
 @onready var _drop_zone: Control = $DropZone
 @onready var _drop_button: BaseButton = $DropButton
+@onready var _drop_sound: AudioStreamPlayer = $DropSound
 
 # Returns array arr where arr[i] is the distance from the top-left x coordinate
 # of layer i from the top-left coordinate of layer i-1.
@@ -43,6 +44,7 @@ func _process(delta: float) -> void:
 
 
 func _on_drop_button_pressed() -> void:
+	_drop_sound.play()
 	if _layers.size() == 1:
 		_layers[-1].position.y = _drop_zone.size.y - _layers[-1].size.y
 	else:

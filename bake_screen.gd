@@ -6,7 +6,7 @@ const _PERFECT_COOKED_TOLERANCE := 0.1
 var layer_count: int
 var layer_cooked_proportions: Array[float]
 var _thermometer_fill_proportion := 0.0
-var _thermometer_is_raising := false
+var _thermometer_is_rising := false
 var _thermometer_is_paused := false
 @onready var _pans_control: Control = $Pans
 @onready var _layers_control: Control = $Layers
@@ -15,21 +15,25 @@ var _thermometer_is_paused := false
 @onready var _thermometer: Control = $Thermometer
 @onready var _thermometer_fill: Control = $Thermometer/Fill
 @onready var _thermometer_perfect: Panel = $Thermometer/Perfect
+@onready var _rising_sound: AudioStreamPlayer = $RisingSound
+@onready var _ding_sound: AudioStreamPlayer = $DingSound
+
 
 func _ready() -> void:
 	_bake_button.pressed.connect(_bake_button_pressed)
 
 
 func _bake_button_pressed() -> void:
-	if _thermometer_is_raising:
+	if _thermometer_is_rising:
 		_stop_thermometer()
 	else:
-		_thermometer_is_raising = true
+		_thermometer_is_rising = true
 		_thermometer_fill_proportion = 0.0
+		_rising_sound.play()
 
 
 func _process(delta: float) -> void:
-	if _thermometer_is_raising:
+	if _thermometer_is_rising:
 		_thermometer_fill_proportion += (
 			(0.05 + _thermometer_fill_proportion * 5.0) * delta
 		)
@@ -40,7 +44,7 @@ func _process(delta: float) -> void:
 
 
 func _stop_thermometer() -> void:
-	_thermometer_is_raising = false
+	_thermometer_is_rising = false
 	_thermometer_is_paused = true
 	get_tree().create_timer(1.0).timeout.connect(func() -> void:
 		_thermometer_is_paused = false
@@ -48,6 +52,8 @@ func _stop_thermometer() -> void:
 			completed.emit()
 	)
 	layer_cooked_proportions.append(_thermometer_fill_proportion)
+	_rising_sound.stop()
+	_ding_sound.play()
 
 
 func _update_ui() -> void:
@@ -56,7 +62,7 @@ func _update_ui() -> void:
 		var layer_is_in_order := i < layer_count
 		var layer_is_cooked := i < layer_cooked_proportions.size()
 		var layer_is_cooking := (
-			_thermometer_is_raising and i == layer_cooked_proportions.size()
+			_thermometer_is_rising and i == layer_cooked_proportions.size()
 		)
 		pan.visible = (
 			layer_is_in_order and not layer_is_cooked and not layer_is_cooking
@@ -72,7 +78,7 @@ func _update_ui() -> void:
 		or cooked_all_layers
 	)
 	_bake_button_label.text = (
-		"STOP" if _thermometer_is_raising or _thermometer_is_paused
+		"STOP" if _thermometer_is_rising or _thermometer_is_paused
 		else "START"
 	)
 

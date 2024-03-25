@@ -1,16 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://dll7xw55q2k68"]
+[gd_scene load_steps=6 format=3 uid="uid://dll7xw55q2k68"]
 
 [ext_resource type="AudioStream" uid="uid://ccr0yxjlxhtt2" path="res://hungarian_dance_no_5.ogg" id="1_lct8c"]
 [ext_resource type="Script" path="res://autoload.gd" id="1_yh4ro"]
 [ext_resource type="AudioStream" uid="uid://clocp0vlalf82" path="res://button_down.ogg" id="3_difqv"]
+[ext_resource type="AudioStream" uid="uid://d4er8h11f7uvo" path="res://tchaikovsky_symphony_no_6_b_minor.ogg" id="3_fwouq"]
 [ext_resource type="AudioStream" uid="uid://f26ne0f3gyrx" path="res://button_up.ogg" id="4_rtk1p"]
 
 [node name="Autoload" type="Node"]
 script = ExtResource("1_yh4ro")
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
+[node name="PlayMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_lct8c")
+volume_db = -5.107
 autoplay = true
+
+[node name="EndMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_fwouq")
+volume_db = 9.286
 
 [node name="Down" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_difqv")

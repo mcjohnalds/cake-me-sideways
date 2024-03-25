@@ -24,19 +24,30 @@ text = "START"
 [node name="TextureRect2" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 340.0
-offset_top = 100.0
+offset_top = 60.0
 offset_right = 620.0
-offset_bottom = 270.0
+offset_bottom = 300.0
 texture = ExtResource("4_mvy2b")
 expand_mode = 1
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 230.0
-offset_top = 127.0
+offset_top = 89.0
 offset_right = 730.0
-offset_bottom = 240.0
+offset_bottom = 202.0
 theme_override_font_sizes/font_size = 45
 text = "CAKE ME
 SIDEWAYS"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 215.0
+offset_right = 580.0
+offset_bottom = 275.0
+theme_override_font_sizes/font_size = 20
+text = "Make $ before the
+timer runs out"
 horizontal_alignment = 1
