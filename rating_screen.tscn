@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdbgd86dd0ymb"]
+[gd_scene load_steps=6 format=3 uid="uid://bdbgd86dd0ymb"]
 
 [ext_resource type="Script" path="res://rating_screen.gd" id="1_omf3l"]
 [ext_resource type="PackedScene" uid="uid://cr8fuisaekftg" path="res://layer.tscn" id="2_1ylpl"]
 [ext_resource type="PackedScene" uid="uid://bewuefnblvty0" path="res://my_button.tscn" id="4_oxcln"]
+[ext_resource type="AudioStream" uid="uid://dk46dvqcb3tdx" path="res://cha_ching.wav" id="5_nrc2w"]
 [ext_resource type="Texture2D" uid="uid://cnoitjhwysskt" path="res://panel_edited.png" id="5_t5efv"]
 
 [node name="RatingScreen" type="Control"]
@@ -192,3 +193,7 @@ offset_left = 360.0
 offset_top = 410.0
 offset_right = 440.0
 offset_bottom = 490.0
+
+[node name="ChaChingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_nrc2w")
+autoplay = true

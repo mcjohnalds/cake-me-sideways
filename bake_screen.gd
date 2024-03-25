@@ -50,6 +50,7 @@ func _process(delta: float) -> void:
 	if next_pan:
 		next_pan.progress_ratio = minf(1.0, next_pan.progress_ratio + 1.0 * delta)
 
+
 func _stop_thermometer() -> void:
 	_thermometer_is_rising = false
 	layer_cooked_proportions.append(_thermometer_fill_proportion)
