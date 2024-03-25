@@ -3,12 +3,10 @@ class_name BakeScreen extends Control
 signal completed
 
 const _PERFECT_COOKED_TOLERANCE := 0.1
-var layer_count: int
-var layer_cooked_proportions: Array[float]
+var layer_count := 4
+var layer_cooked_proportions: Array[float] = []
 var _thermometer_fill_proportion := 0.0
 var _thermometer_is_rising := false
-var _thermometer_is_paused := false
-@onready var _pans_control: Control = $Pans
 @onready var _layers_control: Control = $Layers
 @onready var _bake_button: BaseButton = $BakeButton
 @onready var _bake_button_label: Label = $BakeButton/Label
@@ -17,6 +15,12 @@ var _thermometer_is_paused := false
 @onready var _thermometer_perfect: Panel = $Thermometer/Perfect
 @onready var _rising_sound: AudioStreamPlayer = $RisingSound
 @onready var _ding_sound: AudioStreamPlayer = $DingSound
+@onready var _pans: Array[PathFollow2D] = [
+	$Pans/Pan1Path/PathFollow2D,
+	$Pans/Pan2Path/PathFollow2D,
+	$Pans/Pan3Path/PathFollow2D,
+	$Pans/Pan4Path/PathFollow2D,
+]
 
 
 func _ready() -> void:
@@ -41,31 +45,28 @@ func _process(delta: float) -> void:
 			_thermometer_fill_proportion = 1.0
 			_stop_thermometer()
 	_update_ui()
-
+	
+	var next_pan := _get_next_pan()
+	if next_pan:
+		next_pan.progress_ratio = minf(1.0, next_pan.progress_ratio + 1.0 * delta)
 
 func _stop_thermometer() -> void:
 	_thermometer_is_rising = false
-	_thermometer_is_paused = true
-	get_tree().create_timer(1.0).timeout.connect(func() -> void:
-		_thermometer_is_paused = false
-		if layer_cooked_proportions.size() == layer_count:
-			completed.emit()
-	)
 	layer_cooked_proportions.append(_thermometer_fill_proportion)
+	if layer_cooked_proportions.size() == layer_count:
+		get_tree().create_timer(1.0).timeout.connect(func() -> void:
+				completed.emit()
+		)
 	_rising_sound.stop()
 	_ding_sound.play()
 
 
 func _update_ui() -> void:
 	for i in Util.MAX_LAYER_COUNT:
-		var pan: Control = _pans_control.get_child(i)
 		var layer_is_in_order := i < layer_count
 		var layer_is_cooked := i < layer_cooked_proportions.size()
-		var layer_is_cooking := (
-			_thermometer_is_rising and i == layer_cooked_proportions.size()
-		)
-		pan.visible = (
-			layer_is_in_order and not layer_is_cooked and not layer_is_cooking
+		_pans[i].visible = (
+			layer_is_in_order and not layer_is_cooked
 		)
 	for i in Util.MAX_LAYER_COUNT:
 		_update_layer(i)
@@ -73,12 +74,15 @@ func _update_ui() -> void:
 	var cooked_all_layers := (
 		layer_cooked_proportions.size() == layer_count
 	)
+	var next_pan_is_moving := (
+		_get_next_pan().progress_ratio < 1.0 if _get_next_pan() else false
+	)
 	_bake_button.disabled = (
-		_thermometer_is_paused
+		next_pan_is_moving
 		or cooked_all_layers
 	)
 	_bake_button_label.text = (
-		"STOP" if _thermometer_is_rising or _thermometer_is_paused
+		"STOP" if _thermometer_is_rising or next_pan_is_moving
 		else "START"
 	)
 
@@ -105,3 +109,10 @@ func _update_thermometer() -> void:
 	)
 	_thermometer_fill.size.y = fill_h
 	_thermometer_fill.position.y = thermo_h - fill_h
+
+
+func _get_next_pan() -> PathFollow2D:
+	if layer_cooked_proportions.size() < layer_count:
+		return _pans[layer_cooked_proportions.size()]
+	else:
+		return null

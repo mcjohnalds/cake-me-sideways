@@ -136,12 +136,5 @@ func _process(_delta: float) -> void:
 		_time_label.text = "%d:%02d" % [minutes_part, seconds_part]
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		var k := event as InputEventKey
-		if k.pressed and k.keycode == KEY_ESCAPE:
-			get_tree().quit()
-
-
 func _remove_screen() -> void:
 	_screen_container.get_child(0).queue_free()
