@@ -42,7 +42,7 @@ theme_type_variation = &"7SegPanel"
 
 [node name="FinalScoreLabel" type="Label" parent="Card"]
 layout_mode = 0
-offset_left = 213.0
+offset_left = 40.0
 offset_top = 102.0
 offset_right = 285.0
 offset_bottom = 149.0

@@ -115,6 +115,7 @@ func _go_to_end_screen() -> void:
 		get_tree().reload_current_scene()
 	)
 	_screen_container.add_child(end_screen)
+	end_screen.final_score = _money
 	while true:
 		_time_label.visible = !_time_label.visible
 		await get_tree().create_timer(1.0).timeout
@@ -123,7 +124,7 @@ func _go_to_end_screen() -> void:
 func _process(_delta: float) -> void:
 	if _has_started and not _has_ended:
 		var seconds_passed := Util.time() - _started_at
-		var seconds_remaining := 2 * 60 - floori(seconds_passed)
+		var seconds_remaining := 150 - floori(seconds_passed)
 		if seconds_remaining < 30 and not _ticking_sound.playing:
 			_ticking_sound.play()
 		if seconds_remaining < 0:

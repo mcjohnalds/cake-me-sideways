@@ -37,7 +37,10 @@ var reward: int
 
 
 func get_quality_bonus() -> int:
-	return roundi(float(reward) * (float(_get_quality_score()) ** 2.0))
+	return roundi(
+		float(reward) * (float(_get_quality_score()) ** 2.0) * 2.5
+		- float(reward) * 0.5
+	)
 
 
 func _ready() -> void:
