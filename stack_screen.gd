@@ -1,15 +1,20 @@
+@tool
 class_name StackScreen extends Control
 
 signal completed
 
+const _LAYER_Y_ACCELERATION = 40
 const _layer_scene := preload("res://layer.tscn")
-var layer_cooked_proportions: Array[float]
+@export var layer_cooked_proportions: Array[float]
+var _active_layer_is_falling := false
+var _active_layer_y_velocity := 0.0
 var _layers: Array[Layer] = []
 var _layer_movement_direction := 1.0
 var _is_complete := false
 @onready var _drop_zone: Control = $DropZone
 @onready var _drop_button: BaseButton = $DropButton
 @onready var _drop_sound: AudioStreamPlayer = $DropSound
+
 
 # Returns array arr where arr[i] is the distance from the top-left x coordinate
 # of layer i from the top-left coordinate of layer i-1.
@@ -18,6 +23,7 @@ func get_layer_position_xs() -> Array[float]:
 	for i in _layers.size():
 		arr.append(_layers[i].position.x - _layers[0].position.x)
 	return arr
+
 
 # Returns array arr where arr[i] is 0.0 if layer 1 was perfectly centered, 1.0
 # if layer was far off-center.
@@ -29,6 +35,8 @@ func get_layer_off_center_proportions() -> Array[float]:
 
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
 	_drop_button.pressed.connect(_on_drop_button_pressed)
 	var layer: Layer = _layer_scene.instantiate()
 	layer.layer_index = 0
@@ -38,29 +46,25 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if not _is_complete:
+	if Engine.is_editor_hint():
+		return
+	if _active_layer_is_falling:
+		_active_layer_y_velocity += _LAYER_Y_ACCELERATION * delta
+		_layers[-1].position.y += _active_layer_y_velocity
+		var max_y := (
+			_drop_zone.size.y - _layers[-1].size.y if _layers.size() == 1
+			else _layers[-2].position.y - _layers[-1].size.y
+		)
+		if _layers[-1].position.y > max_y:
+			_on_active_layer_reaches_max_y(max_y)
+	if not _is_complete and not _active_layer_is_falling:
 		_move_top_layer_side_to_side(delta)
 	_update_ui()
 
 
 func _on_drop_button_pressed() -> void:
-	_drop_sound.play()
-	if _layers.size() == 1:
-		_layers[-1].position.y = _drop_zone.size.y - _layers[-1].size.y
-	else:
-		_layers[-1].position.y = _layers[-2].position.y - _layers[-1].size.y
-
-	if _layers.size() < layer_cooked_proportions.size():
-		var new_layer: Layer = _layer_scene.instantiate()
-		new_layer.layer_index = _layers.size()
-		new_layer.cooked_proportion = layer_cooked_proportions[_layers.size()]
-		_drop_zone.add_child(new_layer)
-		_layers.append(new_layer)
-	else:
-		_is_complete = true
-		get_tree().create_timer(1.0).timeout.connect(func() -> void:
-			completed.emit()
-		)
+	_active_layer_is_falling = true
+	_active_layer_y_velocity = 0.0
 
 
 func _move_top_layer_side_to_side(delta: float) -> void:
@@ -117,4 +121,24 @@ func _get_layer_off_center_proportion(layer_index: int) -> float:
 
 
 func _update_ui() -> void:
-	_drop_button.disabled = _is_complete
+	_drop_button.disabled = _is_complete or _active_layer_is_falling
+
+
+func _on_active_layer_reaches_max_y(max_y: float) -> void:
+	_layers[-1].position.y = max_y
+	_active_layer_is_falling = false
+	_drop_sound.play()
+
+	if _layers.size() < layer_cooked_proportions.size():
+		var new_layer: Layer = _layer_scene.instantiate()
+		new_layer.layer_index = _layers.size()
+		new_layer.cooked_proportion = (
+			layer_cooked_proportions[_layers.size()]
+		)
+		_drop_zone.add_child(new_layer)
+		_layers.append(new_layer)
+	else:
+		_is_complete = true
+		get_tree().create_timer(1.0).timeout.connect(func() -> void:
+			completed.emit()
+		)

@@ -12,6 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_a21pp")
+layer_cooked_proportions = Array[float]([0.4, 0.7, 1.0, 0.8])
 
 [node name="DropZone" type="Control" parent="."]
 anchors_preset = 0
