@@ -95,11 +95,11 @@ func _on_stack_screen_completed() -> void:
 		_stack_screen.get_layer_off_center_proportions()
 	)
 	_rating_screen.completed.connect(_on_rating_screen_completed)
+	_money += _reward + _rating_screen.get_quality_bonus()
 	_screen_container.add_child(_rating_screen)
 
 
 func _on_rating_screen_completed() -> void:
-	_money += _reward + _rating_screen.get_quality_bonus()
 	_rating_screen.queue_free()
 
 	_go_to_orders_screen()
