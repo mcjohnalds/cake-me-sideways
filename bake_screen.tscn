@@ -206,7 +206,7 @@ layer_index = 1
 curve = SubResource("Curve2D_4v0uo")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Layers/Layer3"]
-position = Vector2(-180, 100)
+position = Vector2(-180, 99.9999)
 rotation = 3.1325
 progress = 233.179
 rotates = false
@@ -222,7 +222,7 @@ layer_index = 2
 curve = SubResource("Curve2D_blhn3")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Layers/Layer4"]
-position = Vector2(-180, 100)
+position = Vector2(-180, 99.9999)
 rotation = 3.14159
 progress = 263.207
 rotates = false

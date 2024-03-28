@@ -1,3 +1,11 @@
+# Cake Me Sideways
+
+![screenshot](screenshot.png)
+
+Made for [Untitled Game Jam 90](https://itch.io/jam/untitled-game-jam-90)
+
+Built in Godot 4.2.
+
 ## Credit
 
 Kitchen by sirkitree, CC-BY, via Poly Pizza.
