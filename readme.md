@@ -1,5 +1,7 @@
 # Cake Me Sideways
 
+Play at https://milkmanjohn.itch.io/cake-me-sideways.
+
 ![screenshot](screenshot.png)
 
 Made for [Untitled Game Jam 90](https://itch.io/jam/untitled-game-jam-90)
